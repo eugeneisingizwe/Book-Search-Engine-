@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
-import {ApolloClient, ApolloProvider, InMemoryCache, HttpLink} from "@apollo/client";
+import {ApolloClient, ApolloProvider, InMemoryCache, createHttpLink} from "@apollo/client";
 import {setContext} from "@apollo/client/link/context";
 
-const httpLink = HttpLink({
+const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
@@ -15,7 +15,7 @@ const auhtlink = setContext((_, {headers}) => {
   return{
     headers:{
       ...headers,
-      authorization: token ? `bearer ${token}`: "",
+      authorization: token ? `Bearer ${token}`: "",
     }
   };
 });
